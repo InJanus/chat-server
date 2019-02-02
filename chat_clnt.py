@@ -3,6 +3,7 @@
 from socket import AF_INET, socket, SOCK_STREAM
 from threading import Thread
 import tkinter
+import easygui
 
 
 def receive():
@@ -53,8 +54,8 @@ send_button.pack()
 top.protocol("WM_DELETE_WINDOW", on_closing)
 
 #----Now comes the sockets part----
-HOST = easygui.enterbox('Enter host')
-PORT = easygui.enterbox('Enter port')
+HOST = int(easygui.enterbox('Enter host'))
+PORT = int(easygui.enterbox('Enter port'))
 if not PORT:
     PORT = 33000
 else:
