@@ -20,10 +20,11 @@ def receive():
 def send(event=None):  # event is passed by binders.
     """Handles sending of messages."""
     msg = my_msg.get()
+    msgbefore = msg
     msg = bintype.viewChr(bintype.encode(msg,False))
     my_msg.set("")  # Clears input field.
     client_socket.send(bytes(msg, "utf8"))
-    if msg == "{quit}":
+    if msgbefore == "{quit}":
         client_socket.close()
         top.quit()
 
@@ -56,8 +57,9 @@ send_button.pack()
 top.protocol("WM_DELETE_WINDOW", on_closing)
 
 #----Now comes the sockets part----
-HOST = int(easygui.enterbox('Enter host'))
+HOST = easygui.enterbox('Enter host')
 PORT = int(easygui.enterbox('Enter port'))
+BINTYPE = bool(easygui.ccbox('Continue to enable BINTYPE','Please Confirm'))
 if not PORT:
     PORT = 33000
 else:

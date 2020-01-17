@@ -1,0 +1,1 @@
+more features of this could be server logging all chats.
